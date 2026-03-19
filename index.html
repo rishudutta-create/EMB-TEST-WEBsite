@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMB Global — 360° Digitalised Service Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0F1E;
+    --navy-mid: #111827;
+    --navy-light: #1C2537;
+    --gold: #C9A84C;
+    --gold-light: #E4C97B;
+    --gold-pale: #F5E6C0;
+    --white: #F8F6F1;
+    --white-muted: #C8C4BB;
+    --accent-blue: #2563EB;
+    --accent-teal: #0D9488;
+    --accent-purple: #7C3AED;
+    --accent-rose: #E11D48;
+    --border: rgba(201,168,76,0.18);
+    --text-body: #D1CBC0;
+    --text-dim: #7A7570;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    padding: 0 6%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    background: rgba(10,15,30,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--white-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+  .nav-mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-mobile-toggle span {
+    width: 24px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 6% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: rgba(201,168,76,0.07);
+    top: -100px; right: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: rgba(37,99,235,0.08);
+    bottom: -80px; left: 10%;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+    position: relative;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-body);
+    line-height: 1.75;
+    max-width: 560px;
+    margin-bottom: 44px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    border: 2px solid var(--gold);
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,168,76,0.25); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    border: 2px solid rgba(255,255,255,0.2);
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 48px;
+    margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .hero-visual {
+    position: absolute;
+    right: 6%; top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .hero-card-stack {
+    position: relative;
+    width: 380px;
+    height: 420px;
+  }
+  .hcard {
+    position: absolute;
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s;
+  }
+  .hcard:hover { transform: translateY(-6px) !important; }
+  .hcard-1 { top: 0; left: 0; width: 240px; animation: cardFloat 7s ease-in-out infinite; }
+  .hcard-2 { top: 80px; right: 0; width: 220px; animation: cardFloat 9s ease-in-out infinite reverse; }
+  .hcard-3 { bottom: 0; left: 40px; width: 260px; animation: cardFloat 8s ease-in-out infinite 1s; }
+  @keyframes cardFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hcard-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .hcard-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .hcard-value { font-family: 'DM Mono', monospace; font-size: 1.3rem; color: var(--white); font-weight: 500; }
+  .hcard-sub { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 100px 6%; }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+    font-family: 'DM Mono', monospace;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-body);
+    line-height: 1.75;
+    max-width: 560px;
+    font-weight: 300;
+  }
+  .section-head { margin-bottom: 60px; }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    background: var(--navy-light);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    overflow: hidden;
+  }
+  .marquee-inner {
+    display: flex; gap: 64px;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 500;
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .marquee-item::before { content: '—'; color: var(--gold); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── SERVICES OVERVIEW ─── */
+  #services { background: var(--navy); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .svc-tile {
+    background: var(--navy);
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+  .svc-tile:hover { background: var(--navy-light); }
+  .svc-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+  }
+  .svc-tile:hover::before { transform: scaleY(1); }
+  .svc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .svc-icon-wrap {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .svc-tile:hover .svc-icon-wrap { border-color: var(--gold); }
+  .svc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .svc-desc {
+    font-size: 0.88rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .svc-link {
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    transition: gap 0.2s;
+  }
+  .svc-tile:hover .svc-link { gap: 14px; }
+
+  /* ─── CLOUD SECTION ─── */
+  #cloud {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .two-col.reverse { direction: rtl; }
+  .two-col.reverse > * { direction: ltr; }
+
+  .feature-list { list-style: none; margin: 32px 0; }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feat-check {
+    width: 20px; height: 20px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 0.65rem;
+    color: var(--gold);
+  }
+  .feat-check::after { content: '✓'; }
+
+  /* Visual panels */
+  .visual-panel {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .visual-panel-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 24px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+
+  .code-block {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+  .code-kw { color: #7C3AED; }
+  .code-str { color: #C9A84C; }
+  .code-fn { color: #2563EB; }
+  .code-cm { color: var(--text-dim); }
+  .code-var { color: #0D9488; }
+
+  /* Infra diagram */
+  .infra-diagram {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .infra-row {
+    display: flex; gap: 12px;
+  }
+  .infra-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+    color: var(--text-body);
+    flex: 1;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .infra-box:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--white); }
+  .infra-box.highlight { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); }
+  .infra-connector {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    padding: 4px 0;
+  }
+
+  /* AI section */
+  #ai { background: var(--navy); }
+  .ai-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .ai-card {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .ai-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .ai-card:hover::after { transform: scaleX(1); }
+  .ai-card-icon {
+    font-size: 2rem;
+    margin-bottom: 18px;
+  }
+  .ai-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .ai-card-text {
+    font-size: 0.86rem;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+  .ai-card-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 18px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    background: rgba(201,168,76,0.1);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Resource Augmentation */
+  #resource { background: var(--navy-mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .role-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .role-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); transform: translateY(-4px); }
+  .role-icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .role-name { font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .role-avail { font-size: 0.72rem; color: var(--accent-teal); font-family: 'DM Mono', monospace; }
+
+  .process-steps {
+    display: flex; gap: 0;
+    margin-top: 60px;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 16px;
+  }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin: 0 auto 16px;
+    transition: all 0.3s;
+  }
+  .step:hover .step-num { background: var(--gold); color: var(--navy); }
+  .step-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 8px; }
+  .step-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* Marketing */
+  #marketing { background: var(--navy); }
+  .mktg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .mktg-card {
+    border-radius: 14px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .mktg-card:hover { transform: translateY(-5px); }
+  .mktg-card.accent-1 { background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.04)); }
+  .mktg-card.accent-2 { background: linear-gradient(135deg, rgba(13,148,136,0.12), rgba(13,148,136,0.04)); }
+  .mktg-card.accent-3 { background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04)); }
+  .mktg-card.accent-4 { background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(124,58,237,0.04)); }
+  .mktg-card.accent-5 { background: linear-gradient(135deg, rgba(225,29,72,0.12), rgba(225,29,72,0.04)); }
+  .mktg-card.accent-6 { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(10,15,30,0.4)); }
+  .mktg-card-top {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .mktg-icon-box {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .mktg-card-title { font-weight: 700; font-size: 1rem; }
+  .mktg-card-text { font-size: 0.84rem; color: var(--text-body); line-height: 1.7; }
+
+  /* WHY EMB */
+  #why { background: var(--navy-mid); border-top: 1px solid var(--border); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .why-item {
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.3s;
+    background: var(--navy);
+  }
+  .why-item:hover { border-color: var(--gold); }
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: rgba(201,168,76,0.15);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .why-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 10px; }
+  .why-text { font-size: 0.86rem; color: var(--text-body); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--navy); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testi-card {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    transition: all 0.3s;
+  }
+  .testi-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .testi-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .testi-text {
+    font-size: 0.88rem;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .testi-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy);
+  }
+  .testi-name { font-weight: 600; font-size: 0.88rem; }
+  .testi-role { font-size: 0.75rem; color: var(--text-dim); }
+
+  /* INDUSTRIES */
+  #industries { background: var(--navy-mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .industry-chips {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 40px;
+  }
+  .industry-chip {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 0.84rem;
+    color: var(--text-body);
+    transition: all 0.25s;
+    cursor: default;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .industry-chip:hover { border-color: var(--gold); color: var(--white); background: rgba(201,168,76,0.07); }
+
+  /* CTA SECTION */
+  #cta {
+    background: var(--navy);
+    padding: 120px 6%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.06), transparent);
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-sub {
+    font-size: 1.05rem;
+    color: var(--text-body);
+    max-width: 520px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+  }
+  .cta-form {
+    display: flex; gap: 12px;
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .cta-input {
+    flex: 1;
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 13px 18px;
+    color: var(--white);
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-input::placeholder { color: var(--text-dim); }
+  .cta-input:focus { border-color: var(--gold); }
+  .cta-btn {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 13px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { background: var(--gold-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy-light);
+    border-top: 1px solid var(--border);
+    padding: 72px 6% 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+  .footer-brand-name span { color: var(--gold); }
+  .footer-brand-desc {
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 280px;
+  }
+  .footer-social { display: flex; gap: 10px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a {
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 0.78rem; color: var(--text-dim); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 0.78rem; color: var(--text-dim); text-decoration: none; }
+  .footer-legal a:hover { color: var(--gold); }
+
+  /* ── Mobile nav overlay ── */
+  .nav-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,15,30,0.97);
+    z-index: 998;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+  .nav-overlay.open { display: flex; }
+  .nav-overlay a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+  .nav-overlay a:hover { color: var(--gold); }
+  .nav-close {
+    position: absolute; top: 28px; right: 6%;
+    font-size: 1.5rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .nav-close:hover { color: var(--gold); }
+
+  /* ── Counters ── */
+  .counter { font-variant-numeric: tabular-nums; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .hero-visual { display: none; }
+    .two-col { grid-template-columns: 1fr; gap: 48px; }
+    .two-col.reverse { direction: ltr; }
+    .ai-cards { grid-template-columns: repeat(2, 1fr); }
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 5%; }
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: flex; }
+    section { padding: 72px 5%; }
+    .hero-stats { flex-wrap: wrap; gap: 28px; }
+    .ai-cards { grid-template-columns: 1fr; }
+    .mktg-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { flex-direction: column; gap: 24px; }
+    .process-steps::before { display: none; }
+    .cta-form { flex-direction: column; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* Active nav */
+  nav.scrolled { box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <span class="logo-dot"></span>
+    EMB<span> Global</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#cloud">Cloud</a></li>
+    <li><a href="#ai">AI Solutions</a></li>
+    <li><a href="#resource">Talent</a></li>
+    <li><a href="#marketing">Marketing</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#cta" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="nav-mobile-toggle" id="mobileToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-close" id="navClose">✕</div>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#cloud" onclick="closeNav()">Cloud</a>
+  <a href="#ai" onclick="closeNav()">AI Solutions</a>
+  <a href="#resource" onclick="closeNav()">Talent</a>
+  <a href="#marketing" onclick="closeNav()">Marketing</a>
+  <a href="#why" onclick="closeNav()">About</a>
+  <a href="#cta" onclick="closeNav()" style="color:var(--gold)">Get Started</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      360° Digitalised Service Marketplace
+    </div>
+    <h1 class="hero-title">
+      One Platform.<br>
+      <em>Infinite</em> Digital<br>
+      Possibilities.
+    </h1>
+    <p class="hero-sub">
+      EMB Global unifies Cloud infrastructure, AI-driven automation, elite talent acquisition, and enterprise-grade marketing into a single, coherent ecosystem — built for organisations that refuse to compromise on scale or speed.
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Explore Solutions</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="500">0</div>
+        <div class="stat-label">Clients Globally</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="1200">0</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="98">0</div>
+        <div class="stat-label">% Retention Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="40">0</div>
+        <div class="stat-label">Countries Served</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="hcard hcard-1">
+        <div class="hcard-icon" style="background:rgba(37,99,235,0.12);">☁</div>
+        <div class="hcard-label">Cloud Uptime</div>
+        <div class="hcard-value">99.99%</div>
+        <div class="hcard-sub">SLA Guaranteed</div>
+      </div>
+      <div class="hcard hcard-2">
+        <div class="hcard-icon" style="background:rgba(124,58,237,0.12);">⚡</div>
+        <div class="hcard-label">AI Models Deployed</div>
+        <div class="hcard-value">340+</div>
+        <div class="hcard-sub">In Production</div>
+      </div>
+      <div class="hcard hcard-3">
+        <div class="hcard-icon" style="background:rgba(13,148,136,0.12);">👥</div>
+        <div class="hcard-label">Vetted Talent Pool</div>
+        <div class="hcard-value">12,000</div>
+        <div class="hcard-sub">Ready to Deploy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="marqueeInner">
+    <span class="marquee-item">Cloud Infrastructure</span>
+    <span class="marquee-item">AI & Machine Learning</span>
+    <span class="marquee-item">Resource Augmentation</span>
+    <span class="marquee-item">Enterprise Marketing</span>
+    <span class="marquee-item">DevOps Automation</span>
+    <span class="marquee-item">Data Engineering</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Talent On Demand</span>
+    <span class="marquee-item">Cloud Security</span>
+    <span class="marquee-item">Generative AI</span>
+    <span class="marquee-item">Cloud Infrastructure</span>
+    <span class="marquee-item">AI & Machine Learning</span>
+    <span class="marquee-item">Resource Augmentation</span>
+    <span class="marquee-item">Enterprise Marketing</span>
+    <span class="marquee-item">DevOps Automation</span>
+    <span class="marquee-item">Data Engineering</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Talent On Demand</span>
+    <span class="marquee-item">Cloud Security</span>
+    <span class="marquee-item">Generative AI</span>
+  </div>
+</div>
+
+<!-- ─── SERVICES OVERVIEW ─── -->
+<section id="services">
+  <div class="section-head reveal">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Four pillars.<br>One integrated platform.</h2>
+    <p class="section-sub">Every service EMB Global provides is designed to work seamlessly with the others — creating compounding value that siloed vendors simply cannot match.</p>
+  </div>
+  <div class="services-grid reveal">
+    <a href="#cloud" class="svc-tile">
+      <div class="svc-num">01 / Cloud Solutions</div>
+      <div class="svc-icon-wrap">☁</div>
+      <div class="svc-name">Cloud Infrastructure & Engineering</div>
+      <p class="svc-desc">From multi-cloud architecture to serverless deployments and Kubernetes orchestration, we architect resilient, cost-optimised cloud environments that scale without friction.</p>
+      <div class="svc-link">Explore Cloud →</div>
+    </a>
+    <a href="#ai" class="svc-tile">
+      <div class="svc-num">02 / AI Solutions</div>
+      <div class="svc-icon-wrap">⚡</div>
+      <div class="svc-name">Artificial Intelligence & Automation</div>
+      <p class="svc-desc">We translate raw data into competitive intelligence. Our AI practice covers LLM integration, predictive analytics, computer vision, and end-to-end MLOps pipelines.</p>
+      <div class="svc-link">Explore AI →</div>
+    </a>
+    <a href="#resource" class="svc-tile">
+      <div class="svc-num">03 / Resource Augmentation</div>
+      <div class="svc-icon-wrap">👥</div>
+      <div class="svc-name">Elite Talent, On Demand</div>
+      <p class="svc-desc">Access pre-vetted engineers, architects, data scientists, and product managers — embedded within your team, aligned to your culture, deployable within 72 hours.</p>
+      <div class="svc-link">Find Talent →</div>
+    </a>
+    <a href="#marketing" class="svc-tile">
+      <div class="svc-num">04 / Enterprise Marketing</div>
+      <div class="svc-icon-wrap">📈</div>
+      <div class="svc-name">Growth-Oriented Digital Marketing</div>
+      <p class="svc-desc">Performance marketing, brand strategy, SEO, and content that converts. We engineer demand, nurture pipeline, and deliver measurable ROI at enterprise scale.</p>
+      <div class="svc-link">Explore Marketing →</div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── CLOUD ─── -->
+<section id="cloud">
+  <div class="two-col">
+    <div>
+      <div class="reveal">
+        <div class="section-tag">Cloud Solutions</div>
+        <h2 class="section-title">Infrastructure built for the scale you're working towards.</h2>
+        <p class="section-sub">Modern enterprises need cloud environments that are robust by design, cost-conscious by default, and agile enough to evolve with your business. EMB Global's cloud practice covers the full spectrum — from initial architecture through ongoing optimisation.</p>
+      </div>
+      <ul class="feature-list reveal">
+        <li><span class="feat-check"></span><div><strong>Multi-Cloud & Hybrid Strategy</strong> — Architect environments spanning AWS, Azure, and GCP with unified governance, intelligent workload placement, and zero vendor lock-in.</div></li>
+        <li><span class="feat-check"></span><div><strong>Cloud Migration & Modernisation</strong> — Move legacy systems to the cloud with minimal disruption using our proven 6R migration methodology and automated tooling.</div></li>
+        <li><span class="feat-check"></span><div><strong>Infrastructure as Code (IaC)</strong> — Terraform, Pulumi, and Ansible-driven deployments that version your infrastructure alongside your application code.</div></li>
+        <li><span class="feat-check"></span><div><strong>FinOps & Cost Engineering</strong> — Continuous optimisation frameworks that typically reduce cloud spend by 25–40% without compromising performance.</div></li>
+        <li><span class="feat-check"></span><div><strong>Security & Compliance Posture</strong> — Zero-trust architectures, automated compliance scanning, and 24/7 threat monitoring aligned to ISO 27001, SOC 2, and GDPR.</div></li>
+        <li><span class="feat-check"></span><div><strong>Managed Kubernetes & Containers</strong> — Production-grade EKS, AKS, and GKE clusters with GitOps workflows and automated scaling policies.</div></li>
+      </ul>
+      <div class="reveal" style="margin-top:32px;">
+        <a href="#cta" class="btn-primary">Talk to a Cloud Architect</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="visual-panel">
+        <div class="visual-panel-head">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span style="font-size:0.75rem;color:var(--text-dim);margin-left:8px;font-family:'DM Mono',monospace;">infra-architecture.tf</span>
+        </div>
+        <div class="code-block">
+<span class="code-kw">resource</span> <span class="code-str">"aws_eks_cluster"</span> <span class="code-str">"emb_prod"</span> {<br>
+&nbsp;&nbsp;<span class="code-var">name</span>     = <span class="code-str">"emb-production"</span><br>
+&nbsp;&nbsp;<span class="code-var">version</span>  = <span class="code-str">"1.29"</span><br>
+&nbsp;&nbsp;<span class="code-var">role_arn</span> = <span class="code-fn">aws_iam_role</span>.cluster.arn<br>
+<br>
+&nbsp;&nbsp;<span class="code-var">vpc_config</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">subnet_ids</span> = <span class="code-fn">var</span>.private_subnets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">endpoint_private_access</span> = <span class="code-kw">true</span><br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;<span class="code-var">encryption_config</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">provider</span> { <span class="code-var">key_arn</span> = <span class="code-fn">var</span>.kms_key }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">resources</span> = [<span class="code-str">"secrets"</span>]<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+<span class="code-cm"># Auto-scaling node groups</span><br>
+<span class="code-kw">resource</span> <span class="code-str">"aws_eks_node_group"</span> <span class="code-str">"app"</span> {<br>
+&nbsp;&nbsp;<span class="code-var">scaling_config</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">desired_size</span> = <span class="code-str">3</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">max_size</span>     = <span class="code-str">20</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">min_size</span>     = <span class="code-str">1</span><br>
+&nbsp;&nbsp;}<br>
+}
+        </div>
+        <div style="margin-top:28px;">
+          <div class="infra-diagram">
+            <div class="infra-box highlight">Load Balancer — Global CDN</div>
+            <div class="infra-connector">▼</div>
+            <div class="infra-row">
+              <div class="infra-box">App Cluster (EKS)</div>
+              <div class="infra-box">API Gateway</div>
+            </div>
+            <div class="infra-connector">▼</div>
+            <div class="infra-row">
+              <div class="infra-box">RDS Multi-AZ</div>
+              <div class="infra-box">Redis Cache</div>
+              <div class="infra-box">S3 / Blob</div>
+            </div>
+            <div class="infra-connector">▼</div>
+            <div class="infra-box">VPC — Zero Trust Security Perimeter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI SOLUTIONS ─── -->
+<section id="ai">
+  <div class="section-head reveal">
+    <div class="section-tag">AI Solutions</div>
+    <h2 class="section-title">Intelligence that moves<br>at the speed of your business.</h2>
+    <p class="section-sub">We don't sell AI as a concept. We build and deploy production AI systems that generate measurable outcomes — reducing operational overhead, accelerating decision-making, and creating entirely new revenue channels.</p>
+  </div>
+
+  <div class="two-col" style="margin-bottom:64px;">
+    <div class="reveal">
+      <div class="visual-panel">
+        <div class="visual-panel-head">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span style="font-size:0.75rem;color:var(--text-dim);margin-left:8px;font-family:'DM Mono',monospace;">model-pipeline.py</span>
+        </div>
+        <div class="code-block">
+<span class="code-kw">from</span> emb_ai <span class="code-kw">import</span> Pipeline, LLMChain<br>
+<br>
+<span class="code-cm"># Enterprise LLM Orchestration</span><br>
+<span class="code-var">pipeline</span> = <span class="code-fn">Pipeline</span>(<br>
+&nbsp;&nbsp;<span class="code-var">model</span>=<span class="code-str">"gpt-4-enterprise"</span>,<br>
+&nbsp;&nbsp;<span class="code-var">fallback</span>=<span class="code-str">"claude-3-opus"</span>,<br>
+&nbsp;&nbsp;<span class="code-var">guardrails</span>=<span class="code-kw">True</span>,<br>
+&nbsp;&nbsp;<span class="code-var">audit_log</span>=<span class="code-kw">True</span><br>
+)<br>
+<br>
+<span class="code-cm"># Context-aware RAG retrieval</span><br>
+<span class="code-var">chain</span> = <span class="code-fn">LLMChain</span>(<br>
+&nbsp;&nbsp;<span class="code-var">retriever</span>=vector_store.<span class="code-fn">as_retriever</span>(),<br>
+&nbsp;&nbsp;<span class="code-var">memory</span>=<span class="code-fn">ConversationMemory</span>(),<br>
+&nbsp;&nbsp;<span class="code-var">streaming</span>=<span class="code-kw">True</span><br>
+)<br>
+<br>
+<span class="code-kw">async def</span> <span class="code-fn">process_query</span>(query: str):<br>
+&nbsp;&nbsp;<span class="code-kw">return await</span> chain.<span class="code-fn">ainvoke</span>({<span class="code-str">"input"</span>: query})
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:24px;">
+        Our AI practice is grounded in engineering rigour, not experimentation theatre. Every solution we build is production-hardened, explainable, and integrated into your existing workflows — not a standalone prototype that never makes it to live.
+      </p>
+      <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:32px;">
+        From fine-tuning foundational models on proprietary data to designing multi-agent orchestration systems that automate complex business workflows, our team brings the depth of academic research and the pragmatism of enterprise delivery.
+      </p>
+      <ul class="feature-list">
+        <li><span class="feat-check"></span><div><strong>LLM Integration & Customisation</strong> — Fine-tuning, RAG pipelines, and enterprise AI agents built on GPT-4, Claude, Gemini, and open-source models.</div></li>
+        <li><span class="feat-check"></span><div><strong>Predictive Analytics & Forecasting</strong> — ML models for demand forecasting, churn prediction, fraud detection, and anomaly analysis.</div></li>
+        <li><span class="feat-check"></span><div><strong>MLOps & Model Lifecycle</strong> — End-to-end MLOps with automated retraining, drift detection, and CI/CD pipelines for model deployment.</div></li>
+        <li><span class="feat-check"></span><div><strong>Computer Vision Systems</strong> — Object detection, quality inspection, document processing, and real-time visual analytics.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ai-cards">
+    <div class="ai-card reveal reveal-delay-1">
+      <div class="ai-card-icon">🧠</div>
+      <div class="ai-card-title">Generative AI</div>
+      <p class="ai-card-text">Enterprise-grade GenAI applications — content engines, code assistants, document Q&A systems, and multimodal applications — built with robust security and compliance guardrails.</p>
+      <div class="ai-card-tags">
+        <span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">Fine-tuning</span>
+      </div>
+    </div>
+    <div class="ai-card reveal reveal-delay-2">
+      <div class="ai-card-icon">📊</div>
+      <div class="ai-card-title">Data Intelligence</div>
+      <p class="ai-card-text">Transform fragmented data estates into unified intelligence layers. We architect data lakes, pipelines, and self-service BI platforms that give decision-makers accurate, real-time insights.</p>
+      <div class="ai-card-tags">
+        <span class="tag">Data Lake</span><span class="tag">ETL</span><span class="tag">BI</span>
+      </div>
+    </div>
+    <div class="ai-card reveal reveal-delay-3">
+      <div class="ai-card-icon">🤖</div>
+      <div class="ai-card-title">Process Automation</div>
+      <p class="ai-card-text">Intelligent automation that goes beyond RPA — combining AI reasoning with workflow orchestration to handle complex, judgement-intensive tasks at scale without human intervention.</p>
+      <div class="ai-card-tags">
+        <span class="tag">Agents</span><span class="tag">RPA</span><span class="tag">Workflow</span>
+      </div>
+    </div>
+    <div class="ai-card reveal reveal-delay-1">
+      <div class="ai-card-icon">👁</div>
+      <div class="ai-card-title">Computer Vision</div>
+      <p class="ai-card-text">Visual AI for manufacturing quality assurance, retail shelf analytics, medical image analysis, and identity verification — integrated directly into your operational systems.</p>
+      <div class="ai-card-tags">
+        <span class="tag">CV</span><span class="tag">Detection</span><span class="tag">OCR</span>
+      </div>
+    </div>
+    <div class="ai-card reveal reveal-delay-2">
+      <div class="ai-card-icon">🔮</div>
+      <div class="ai-card-title">Predictive Modelling</div>
+      <p class="ai-card-text">Statistical and deep learning models for forecasting, scoring, and recommendation — deployed in production with continuous monitoring and automated retraining pipelines.</p>
+      <div class="ai-card-tags">
+        <span class="tag">ML</span><span class="tag">Forecasting</span><span class="tag">Scoring</span>
+      </div>
+    </div>
+    <div class="ai-card reveal reveal-delay-3">
+      <div class="ai-card-icon">🛡</div>
+      <div class="ai-card-title">Responsible AI</div>
+      <p class="ai-card-text">Governance frameworks, explainability tooling, bias audits, and compliance architecture to ensure your AI deployments meet regulatory requirements and earn stakeholder trust.</p>
+      <div class="ai-card-tags">
+        <span class="tag">Ethics</span><span class="tag">XAI</span><span class="tag">Governance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESOURCE AUGMENTATION ─── -->
+<section id="resource">
+  <div class="section-head reveal">
+    <div class="section-tag">Resource Augmentation</div>
+    <h2 class="section-title">The right talent, precisely when you need it.</h2>
+    <p class="section-sub">Hiring cycles are slow. Projects are urgent. EMB Global's augmentation model gives you immediate access to pre-vetted specialists who integrate with your team within days, not months — maintaining your velocity without compromising on quality.</p>
+  </div>
+
+  <div class="two-col" style="margin-bottom:64px;">
+    <div class="reveal">
+      <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:24px;">
+        We maintain a living network of over 12,000 vetted professionals across engineering, data, product, and design disciplines. Every candidate undergoes a rigorous multi-stage assessment — technical evaluation, cultural alignment interviews, and reference verification — before joining our active talent pool.
+      </p>
+      <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:32px;">
+        Whether you need a single senior backend engineer for a six-week sprint, or a cross-functional squad to lead a platform rebuild, we assemble teams that perform from day one.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;">
+        <div style="background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:22px;">
+          <div style="font-family:'DM Mono',monospace;font-size:1.8rem;color:var(--gold);font-weight:500;margin-bottom:4px;">72h</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;">Average Deployment Time</div>
+        </div>
+        <div style="background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:22px;">
+          <div style="font-family:'DM Mono',monospace;font-size:1.8rem;color:var(--gold);font-weight:500;margin-bottom:4px;">12K+</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;">Active Professionals</div>
+        </div>
+        <div style="background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:22px;">
+          <div style="font-family:'DM Mono',monospace;font-size:1.8rem;color:var(--gold);font-weight:500;margin-bottom:4px;">97%</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;">Client Satisfaction Score</div>
+        </div>
+        <div style="background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:22px;">
+          <div style="font-family:'DM Mono',monospace;font-size:1.8rem;color:var(--gold);font-weight:500;margin-bottom:4px;">35+</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;">Technology Specialisations</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="visual-panel">
+        <div style="font-size:0.75rem;color:var(--text-dim);font-family:'DM Mono',monospace;margin-bottom:20px;text-transform:uppercase;letter-spacing:0.1em;">Available Talent — Live Pool</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">Senior Cloud Architect</div>
+              <div style="font-size:0.72rem;color:var(--text-dim);">AWS · Terraform · Kubernetes</div>
+            </div>
+            <div style="font-size:0.7rem;color:var(--accent-teal);font-family:'DM Mono',monospace;background:rgba(13,148,136,0.1);padding:4px 10px;border-radius:100px;">Available</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">AI/ML Engineer</div>
+              <div style="font-size:0.72rem;color:var(--text-dim);">PyTorch · LangChain · MLflow</div>
+            </div>
+            <div style="font-size:0.7rem;color:var(--accent-teal);font-family:'DM Mono',monospace;background:rgba(13,148,136,0.1);padding:4px 10px;border-radius:100px;">Available</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">Full-Stack Engineer</div>
+              <div style="font-size:0.72rem;color:var(--text-dim);">React · Node.js · PostgreSQL</div>
+            </div>
+            <div style="font-size:0.7rem;color:var(--gold);font-family:'DM Mono',monospace;background:rgba(201,168,76,0.1);padding:4px 10px;border-radius:100px;">2 Weeks</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">Data Engineer</div>
+              <div style="font-size:0.72rem;color:var(--text-dim);">Spark · dbt · Snowflake</div>
+            </div>
+            <div style="font-size:0.7rem;color:var(--accent-teal);font-family:'DM Mono',monospace;background:rgba(13,148,136,0.1);padding:4px 10px;border-radius:100px;">Available</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">DevOps / Platform Engineer</div>
+              <div style="font-size:0.72rem;color:var(--text-dim);">CI/CD · Ansible · Prometheus</div>
+            </div>
+            <div style="font-size:0.7rem;color:var(--accent-teal);font-family:'DM Mono',monospace;background:rgba(13,148,136,0.1);padding:4px 10px;border-radius:100px;">Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="roles-grid reveal">
+    <div class="role-card"><div class="role-icon">☁</div><div class="role-name">Cloud Architects</div><div class="role-avail">340+ Available</div></div>
+    <div class="role-card"><div class="role-icon">🧠</div><div class="role-name">ML Engineers</div><div class="role-avail">210+ Available</div></div>
+    <div class="role-card"><div class="role-icon">⚛</div><div class="role-name">Frontend Engineers</div><div class="role-avail">580+ Available</div></div>
+    <div class="role-card"><div class="role-icon">⚙</div><div class="role-name">Backend Engineers</div><div class="role-avail">640+ Available</div></div>
+    <div class="role-card"><div class="role-icon">🔧</div><div class="role-name">DevOps Engineers</div><div class="role-avail">290+ Available</div></div>
+    <div class="role-card"><div class="role-icon">📊</div><div class="role-name">Data Scientists</div><div class="role-avail">190+ Available</div></div>
+    <div class="role-card"><div class="role-icon">🎯</div><div class="role-name">Product Managers</div><div class="role-avail">160+ Available</div></div>
+    <div class="role-card"><div class="role-icon">🎨</div><div class="role-name">UX/UI Designers</div><div class="role-avail">220+ Available</div></div>
+  </div>
+
+  <div class="process-steps reveal" style="margin-top:60px;">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Requirement Brief</div>
+      <div class="step-desc">Define your technical requirements, cultural fit parameters, and timeline through a structured intake session.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Matched Shortlist</div>
+      <div class="step-desc">Within 24 hours, receive a curated shortlist of three to five pre-vetted candidates matched to your specific criteria.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Interview & Select</div>
+      <div class="step-desc">Interview candidates directly. We handle scheduling, assessment support, and reference verification.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Onboard in 72h</div>
+      <div class="step-desc">Seamless onboarding with environment access, tooling setup, and first-sprint planning completed before day one.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-title">Ongoing Support</div>
+      <div class="step-desc">Dedicated account management, performance reviews, and the flexibility to scale your team up or down at any point.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARKETING ─── -->
+<section id="marketing">
+  <div class="section-head reveal">
+    <div class="section-tag">Enterprise Marketing</div>
+    <h2 class="section-title">Marketing engineered<br>for measurable growth.</h2>
+    <p class="section-sub">We approach marketing the way engineers approach systems — with precision, data, and an obsession with outcomes. Our enterprise marketing practice builds demand engines that generate qualified pipeline, not vanity metrics.</p>
+  </div>
+
+  <div class="mktg-grid">
+    <div class="mktg-card accent-1 reveal reveal-delay-1">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(37,99,235,0.15);">📣</div>
+        <div class="mktg-card-title">Performance Marketing</div>
+      </div>
+      <p class="mktg-card-text">Paid acquisition across Search, Social, Programmatic, and CTV — driven by proprietary bidding algorithms, continuous creative testing, and attribution modelling that connects ad spend to closed revenue.</p>
+    </div>
+    <div class="mktg-card accent-2 reveal reveal-delay-2">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(13,148,136,0.15);">🔍</div>
+        <div class="mktg-card-title">SEO & Content Strategy</div>
+      </div>
+      <p class="mktg-card-text">Technical SEO, topical authority building, and content programmes designed to rank, convert, and compound over time. We produce content that earns rankings and trust simultaneously.</p>
+    </div>
+    <div class="mktg-card accent-3 reveal reveal-delay-3">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(201,168,76,0.15);">🏗</div>
+        <div class="mktg-card-title">Brand Architecture</div>
+      </div>
+      <p class="mktg-card-text">Strategic brand positioning, visual identity systems, and messaging frameworks that differentiate enterprises in complex, crowded markets. We build brands that resonate with buyers, not just designers.</p>
+    </div>
+    <div class="mktg-card accent-4 reveal reveal-delay-1">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(124,58,237,0.15);">⚙</div>
+        <div class="mktg-card-title">Marketing Automation</div>
+      </div>
+      <p class="mktg-card-text">HubSpot, Marketo, and Salesforce Marketing Cloud implementations with sophisticated nurture programmes, lead scoring models, and intent-based personalisation that accelerate pipeline velocity.</p>
+    </div>
+    <div class="mktg-card accent-5 reveal reveal-delay-2">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(225,29,72,0.15);">📱</div>
+        <div class="mktg-card-title">Social Media & Community</div>
+      </div>
+      <p class="mktg-card-text">Platform-native content strategies for LinkedIn, X, Instagram, and emerging channels — backed by social listening, competitive benchmarking, and community management at scale.</p>
+    </div>
+    <div class="mktg-card accent-6 reveal reveal-delay-3">
+      <div class="mktg-card-top">
+        <div class="mktg-icon-box" style="background:rgba(201,168,76,0.12);">📈</div>
+        <div class="mktg-card-title">Analytics & Attribution</div>
+      </div>
+      <p class="mktg-card-text">GA4, Mixpanel, and custom analytics stacks that provide true multi-touch attribution, cohort analysis, and predictive customer lifetime value modelling to inform every budget decision.</p>
+    </div>
+  </div>
+
+  <div style="background:var(--navy-light);border:1px solid var(--border);border-radius:16px;padding:48px;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;" class="reveal">
+    <div>
+      <div class="section-tag">Results at Scale</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:14px;line-height:1.2;">What enterprise-grade marketing looks like in practice.</h3>
+      <p style="font-size:0.88rem;color:var(--text-body);line-height:1.75;">Across our client base, EMB Global's marketing practice consistently delivers above-benchmark results. These are not handpicked outliers — they reflect the median performance across our retained accounts.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="text-align:center;padding:20px;background:var(--navy);border-radius:10px;border:1px solid var(--border);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;">3.8x</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">Average ROAS</div>
+      </div>
+      <div style="text-align:center;padding:20px;background:var(--navy);border-radius:10px;border:1px solid var(--border);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;">+62%</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">Organic Traffic Growth</div>
+      </div>
+      <div style="text-align:center;padding:20px;background:var(--navy);border-radius:10px;border:1px solid var(--border);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;">-34%</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">Customer Acquisition Cost</div>
+      </div>
+      <div style="text-align:center;padding:20px;background:var(--navy);border-radius:10px;border:1px solid var(--border);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;">+41%</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">Pipeline Contribution</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INDUSTRIES ─── -->
+<section id="industries">
+  <div class="section-head reveal">
+    <div class="section-tag">Industries We Serve</div>
+    <h2 class="section-title">Domain depth across<br>every major vertical.</h2>
+    <p class="section-sub">EMB Global brings sector-specific expertise to every engagement — understanding the regulatory landscape, competitive dynamics, and technical constraints unique to your industry.</p>
+  </div>
+  <div class="industry-chips reveal">
+    <div class="industry-chip">Financial Services & Fintech</div>
+    <div class="industry-chip">Healthcare & Life Sciences</div>
+    <div class="industry-chip">Retail & E-Commerce</div>
+    <div class="industry-chip">Manufacturing & Industry 4.0</div>
+    <div class="industry-chip">Media & Entertainment</div>
+    <div class="industry-chip">Telecommunications</div>
+    <div class="industry-chip">Logistics & Supply Chain</div>
+    <div class="industry-chip">Education Technology</div>
+    <div class="industry-chip">Real Estate & PropTech</div>
+    <div class="industry-chip">Government & Public Sector</div>
+    <div class="industry-chip">Energy & Utilities</div>
+    <div class="industry-chip">Insurance & Risk</div>
+    <div class="industry-chip">Automotive & Mobility</div>
+    <div class="industry-chip">Professional Services</div>
+  </div>
+</section>
+
+<!-- ─── WHY EMB ─── -->
+<section id="why">
+  <div class="section-head reveal">
+    <div class="section-tag">Why EMB Global</div>
+    <h2 class="section-title">The case for a single,<br>integrated partner.</h2>
+    <p class="section-sub">Managing five vendors across cloud, AI, talent, and marketing creates coordination overhead, misaligned incentives, and integration risk. EMB Global eliminates that complexity.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-item reveal reveal-delay-1">
+      <div class="why-num">01</div>
+      <div class="why-title">Unified Accountability</div>
+      <p class="why-text">One partner. One SLA. One point of contact who understands the full picture of your digital estate — and is accountable for outcomes, not just deliverables.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-2">
+      <div class="why-num">02</div>
+      <div class="why-title">Cross-Domain Expertise</div>
+      <p class="why-text">Our teams are deep specialists, not generalists. Cloud architects who understand AI workloads. Marketers who can read a data model. The intersections are where the real value is generated.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-3">
+      <div class="why-num">03</div>
+      <div class="why-title">Speed Without Compromise</div>
+      <p class="why-text">Pre-built accelerators, reusable IP, and an integrated talent network mean we move at startup speed without the quality trade-offs that typically accompany it.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-1">
+      <div class="why-num">04</div>
+      <div class="why-title">Outcome-Based Engagement</div>
+      <p class="why-text">Our commercial models are aligned to your business outcomes, not billable hours. We share the risk — and the upside — of the work we do together.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-2">
+      <div class="why-num">05</div>
+      <div class="why-title">Global Reach, Local Context</div>
+      <p class="why-text">Operating across 40+ countries with teams embedded in regional markets, we bring the operational capacity of a global firm with the cultural intelligence of a local partner.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-3">
+      <div class="why-num">06</div>
+      <div class="why-title">Continuous Innovation</div>
+      <p class="why-text">Our R&D investment ensures clients have early access to emerging capabilities — from frontier AI models to next-generation cloud primitives — before they become table stakes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section id="testimonials">
+  <div class="section-head reveal">
+    <div class="section-tag">Client Voices</div>
+    <h2 class="section-title">What our clients say.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">EMB Global consolidated what used to be four separate vendor relationships into a single, coherent programme. The reduction in coordination overhead alone justified the switch — the results made it an obvious decision in hindsight.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Rajiv Kumar</div>
+          <div class="testi-role">CTO, FinancePro Group</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">We needed a 12-person engineering squad stood up in three weeks for a product launch. EMB Global delivered 11 of them within 72 hours, with a twelfth joining five days later. The team outperformed every expectation.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SL</div>
+        <div>
+          <div class="testi-name">Sarah Lim</div>
+          <div class="testi-role">VP Engineering, RetailEdge</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-3">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The AI pipeline EMB built reduced our document processing time from 4 hours to 11 minutes per case. That's not incremental improvement — it's a step change in operational capacity that directly affected our bottom line.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MA</div>
+        <div>
+          <div class="testi-name">Marcus Adeyemi</div>
+          <div class="testi-role">Head of Operations, Orion Insurance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta">
+  <div style="position:relative;z-index:2;">
+    <div class="section-tag" style="display:block;text-align:center;margin-bottom:14px;">Start Your Journey</div>
+    <h2 class="cta-title">
+      Ready to build something<br>
+      <em style="font-style:normal;color:var(--gold);">that actually scales?</em>
+    </h2>
+    <p class="cta-sub">Tell us what you're working on. A member of our team will reach out within one business day with a tailored perspective on how EMB Global can help.</p>
+    <div class="cta-form">
+      <input type="email" class="cta-input" placeholder="your@email.com" id="emailInput">
+      <button class="cta-btn" onclick="handleCTA()">Get in Touch</button>
+    </div>
+    <p style="font-size:0.75rem;color:var(--text-dim);text-align:center;margin-top:14px;">No sales pressure. No templated responses. Just a genuine conversation.</p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">EMB<span> Global</span></div>
+      <p class="footer-brand-desc">A 360-degree digitalised service marketplace delivering Cloud, AI, Resource Augmentation, and Enterprise Marketing solutions to ambitious organisations worldwide.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">YT</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#cloud">Cloud Infrastructure</a></li>
+        <li><a href="#cloud">Cloud Migration</a></li>
+        <li><a href="#cloud">DevOps & SRE</a></li>
+        <li><a href="#ai">AI Solutions</a></li>
+        <li><a href="#ai">Data Engineering</a></li>
+        <li><a href="#ai">ML Operations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Talent</div>
+      <ul class="footer-links">
+        <li><a href="#resource">Engineers On Demand</a></li>
+        <li><a href="#resource">Data Scientists</a></li>
+        <li><a href="#resource">Product Managers</a></li>
+        <li><a href="#resource">Dedicated Teams</a></li>
+        <li><a href="#resource">Staff Augmentation</a></li>
+        <li><a href="#resource">Executive Search</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Marketing</div>
+      <ul class="footer-links">
+        <li><a href="#marketing">Performance Marketing</a></li>
+        <li><a href="#marketing">SEO & Content</a></li>
+        <li><a href="#marketing">Brand Strategy</a></li>
+        <li><a href="#marketing">Marketing Automation</a></li>
+        <li><a href="#marketing">Social Media</a></li>
+        <li><a href="#marketing">Analytics</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#why">About EMB</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Blog & Insights</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Partner Programme</a></li>
+        <li><a href="#cta">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 EMB Global. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── COUNTER ANIMATION ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(ease * target) + (progress === 1 ? '+' : '');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const counters = document.querySelectorAll('.counter');
+const observed = new Set();
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !observed.has(entry.target)) {
+      observed.add(entry.target);
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+reveals.forEach(el => observer.observe(el));
+counters.forEach(el => counterObserver.observe(el));
+
+// ── NAV SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── MOBILE NAV ──
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  document.getElementById('navOverlay').classList.add('open');
+});
+document.getElementById('navClose').addEventListener('click', () => {
+  document.getElementById('navOverlay').classList.remove('open');
+});
+function closeNav() {
+  document.getElementById('navOverlay').classList.remove('open');
+}
+
+// ── CTA HANDLER ──
+function handleCTA() {
+  const input = document.getElementById('emailInput');
+  const email = input.value.trim();
+  const btn = document.querySelector('.cta-btn');
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = '#E11D48';
+    input.placeholder = 'Please enter a valid email';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.placeholder = 'your@email.com';
+    }, 2500);
+    return;
+  }
+  btn.textContent = 'Sent!';
+  btn.style.background = '#0D9488';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Get in Touch';
+    btn.style.background = '';
+  }, 3000);
+}
+
+// Allow Enter key in CTA input
+document.getElementById('emailInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleCTA();
+});
+</script>
+
+</body>
+</html>
